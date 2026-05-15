@@ -12,6 +12,11 @@ const categories = [
   },
 ];
 
+const categoryGroups = [
+  { label: "生活区单词", categoryIds: ["shopping", "food"] },
+  { label: "工作区单词", categoryIds: ["workplace"] },
+];
+
 const shoppingWords = [
   {
     word: "afford",
@@ -746,28 +751,40 @@ export default function App() {
           </div>
         </header>
 
-        <nav style={styles.categoryTabs} aria-label="Vocabulary categories">
-          {categories.map((category) => {
-            const isActive = activeCategory === category.id;
+        <nav style={styles.categoryGroups} aria-label="Vocabulary categories">
+          {categoryGroups.map((group) => (
+            <div key={group.label} style={styles.categoryGroup}>
+              <div style={styles.categoryGroupLabel}>{group.label}</div>
+              <div style={styles.categoryTabs}>
+                {group.categoryIds.map((categoryId) => {
+                  const category = categories.find(
+                    (item) => item.id === categoryId,
+                  );
+                  const isActive = activeCategory === category?.id;
 
-            return (
-              <button
-                key={category.id}
-                onClick={() => {
-                  setActiveCategory(category.id);
-                  setQuery("");
-                  setVisibleZh({});
-                  stop();
-                }}
-                style={{
-                  ...styles.categoryTab,
-                  ...(isActive ? styles.activeCategoryTab : {}),
-                }}
-              >
-                {category.label}
-              </button>
-            );
-          })}
+                  if (!category) return null;
+
+                  return (
+                    <button
+                      key={category.id}
+                      onClick={() => {
+                        setActiveCategory(category.id);
+                        setQuery("");
+                        setVisibleZh({});
+                        stop();
+                      }}
+                      style={{
+                        ...styles.categoryTab,
+                        ...(isActive ? styles.activeCategoryTab : {}),
+                      }}
+                    >
+                      {category.label}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
         </nav>
 
         <section style={styles.toolbar}>
@@ -965,10 +982,28 @@ const styles = {
     alignItems: "center",
     gap: "8px",
   },
+  categoryGroups: {
+    display: "flex",
+    gap: "18px",
+    marginTop: "18px",
+    flexWrap: "wrap",
+    alignItems: "flex-end",
+  },
+  categoryGroup: {
+    display: "flex",
+    flexDirection: "column",
+    gap: "8px",
+  },
+  categoryGroupLabel: {
+    color: "#475569",
+    fontSize: "14px",
+    fontWeight: 900,
+    letterSpacing: "0",
+    paddingLeft: "4px",
+  },
   categoryTabs: {
     display: "flex",
     gap: "10px",
-    marginTop: "18px",
     flexWrap: "wrap",
   },
   categoryTab: {
