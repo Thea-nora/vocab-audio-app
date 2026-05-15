@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import { Volume2, Square, Search, RotateCcw } from "lucide-react";
 
 const words = [
@@ -92,6 +92,90 @@ const words = [
       "If something is fashionable, it is popular at a certain time.",
     example: "You can see fashionable clothes at a fashion show.",
     zh: "流行的；时髦的",
+  },
+  {
+    word: "neat",
+    ipa: "/niːt/",
+    pos: "adj.",
+    meaning: "If something is neat, it is tidy and clean.",
+    example: "The store's shelves are very neat.",
+    zh: "整洁的；干净的",
+  },
+  {
+    word: "parking lot",
+    ipa: "/ˈpɑːrkɪŋ lɑːt/",
+    pos: "n.",
+    meaning: "A parking lot is an open area for cars to park in.",
+    example: "There are a lot of cars in the parking lot.",
+    zh: "停车场",
+  },
+  {
+    word: "pick",
+    ipa: "/pɪk/",
+    pos: "v.",
+    meaning: "To pick something is to choose it.",
+    example: "He picks a gray T-shirt.",
+    zh: "挑选；选择",
+    note: "SYN. choose",
+  },
+  {
+    word: "price",
+    ipa: "/praɪs/",
+    pos: "n.",
+    meaning: "The price of something is how much you have to pay for it.",
+    example: "She's checking the price.",
+    zh: "价格；价钱",
+  },
+  {
+    word: "sell",
+    ipa: "/sel/",
+    pos: "v.",
+    forms: "sold – sold",
+    meaning: "To sell something is to offer it for people to buy.",
+    example: "She sells makeup.",
+    zh: "卖；出售",
+  },
+  {
+    word: "shop",
+    ipa: "/ʃɑːp/",
+    pos: "n.",
+    meaning: "A shop is a place where you can buy goods or services.",
+    example: "He works at a bike shop.",
+    zh: "商店；店铺",
+  },
+  {
+    word: "shopper",
+    ipa: "/ˈʃɑːpər/",
+    pos: "n.",
+    meaning: "A shopper is someone who buys things in stores.",
+    example: "The store is filled with shoppers.",
+    zh: "购物者；顾客",
+  },
+  {
+    word: "supermarket",
+    ipa: "/ˈsuːpərmɑːrkɪt/",
+    pos: "n.",
+    meaning:
+      "A supermarket is a large store that sells food, drinks, and other things people need in their homes.",
+    example: "This supermarket is huge.",
+    zh: "超市",
+  },
+  {
+    word: "try",
+    ipa: "/traɪ/",
+    pos: "v.",
+    forms: "tried – tried",
+    meaning: "To try is to attempt to do something.",
+    example: "She is trying to decide what to buy.",
+    zh: "尝试；试图",
+  },
+  {
+    word: "wonderful",
+    ipa: "/ˈwʌndərfəl/",
+    pos: "adj.",
+    meaning: "If something is wonderful, it is very good.",
+    example: "He thinks this store is wonderful.",
+    zh: "极好的；精彩的",
   },
 ];
 
