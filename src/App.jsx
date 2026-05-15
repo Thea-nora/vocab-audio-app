@@ -4,6 +4,7 @@ import { Volume2, Square, Search, RotateCcw } from "lucide-react";
 const categories = [
   { id: "shopping", label: "Shopping", unit: "UNIT 11", title: "SHOPPING" },
   { id: "food", label: "Food", unit: "UNIT 09", title: "FOOD" },
+  { id: "workplace", label: "Workplace", unit: "WORK", title: "WORKPLACE" },
 ];
 
 const shoppingWords = [
@@ -306,9 +307,233 @@ const foodWords = [
   },
 ];
 
+const workplaceWords = [
+  {
+    word: "a copy of",
+    ipa: "",
+    pos: "phr.",
+    meaning: "A copy of something is one reproduced version of it.",
+    example: "Please send me a copy of the report.",
+    zh: "一份……副本 / 复印件",
+    emoji: "📄",
+  },
+  {
+    word: "complete tasks",
+    ipa: "",
+    pos: "phr.",
+    meaning: "To complete tasks is to finish assigned pieces of work.",
+    example: "I need to complete these tasks before the end of the sprint.",
+    zh: "完成任务",
+    emoji: "✅",
+  },
+  {
+    word: "capacity",
+    ipa: "/kəˈpæsɪti/",
+    pos: "n.",
+    meaning:
+      "Capacity is the amount of work, load, or volume that someone or something can handle.",
+    example: "We need to check the team's current capacity.",
+    zh: "能力；容量；处理能力",
+    emoji: "📊",
+  },
+  {
+    word: "capacity in days",
+    ipa: "",
+    pos: "phr.",
+    meaning: "Capacity in days describes how much work can be handled by day.",
+    example: "The report shows our capacity in days.",
+    zh: "日均任务处理能力",
+    emoji: "📅",
+  },
+  {
+    word: "at full capacity",
+    ipa: "",
+    pos: "phr.",
+    meaning: "At full capacity means using all available ability or resources.",
+    example: "The team is currently working at full capacity.",
+    zh: "全负荷；满负载",
+    emoji: "🔋",
+  },
+  {
+    word: "over capacity",
+    ipa: "/ˌoʊvər kəˈpæsɪti/",
+    pos: "phr.",
+    meaning: "Over capacity means having more work or load than can be handled.",
+    example: "We are over capacity this sprint.",
+    zh: "超负荷；超过容量",
+    emoji: "⚠️",
+  },
+  {
+    word: "per sprint",
+    ipa: "/pər sprɪnt/",
+    pos: "phr.",
+    meaning: "Per sprint means for each sprint or iteration.",
+    example: "We usually complete ten tasks per sprint.",
+    zh: "每轮迭代",
+    emoji: "🏃",
+  },
+  {
+    word: "period",
+    ipa: "/ˈpɪriəd/",
+    pos: "n.",
+    meaning: "A period is a length of time, a stage, or a punctuation mark.",
+    example: "This issue happened during the testing period.",
+    zh: "阶段；周期；时期；句号",
+    emoji: "⏳",
+  },
+  {
+    word: "quick glance",
+    ipa: "/kwɪk ɡlæns/",
+    pos: "phr.",
+    meaning: "A quick glance is a brief look at something.",
+    example: "I took a quick glance at the test results.",
+    zh: "快速浏览；扫一眼；粗略查看",
+    emoji: "👀",
+  },
+  {
+    word: "system availability",
+    ipa: "/ˈsɪstəm əˌveɪləˈbɪləti/",
+    pos: "phr.",
+    meaning: "System availability is how reliably a system is ready for use.",
+    example: "System availability is critical for production stability.",
+    zh: "系统可用性",
+    emoji: "🟢",
+  },
+  {
+    word: "version compatibility",
+    ipa: "/ˈvɝːʒən kəmˌpætəˈbɪləti/",
+    pos: "phr.",
+    meaning:
+      "Version compatibility means different software versions can work together correctly.",
+    example: "We need to verify version compatibility before release.",
+    zh: "版本兼容性",
+    emoji: "🔄",
+  },
+  {
+    word: "cider",
+    ipa: "/ˈsaɪdɚ/",
+    pos: "n.",
+    meaning: "Cider is a drink made from apples.",
+    example: "She ordered a glass of cider.",
+    zh: "苹果酒",
+    emoji: "🍎",
+  },
+  {
+    word: "piper",
+    ipa: "/ˈpaɪpɚ/",
+    pos: "n.",
+    meaning: "A piper is a person who plays a pipe or flute-like instrument.",
+    example: "The piper played music in the street.",
+    zh: "吹笛者；管道工；派珀",
+    emoji: "🎶",
+  },
+  {
+    word: "critique",
+    ipa: "/krɪˈtik/",
+    pos: "n.",
+    meaning: "A critique is a careful review, comment, or evaluation.",
+    example: "The team gave a detailed critique of the design.",
+    zh: "批评；评论；评审",
+    emoji: "📝",
+  },
+  {
+    word: "git fetch",
+    ipa: "/ɡɪt fetʃ/",
+    pos: "cmd.",
+    meaning: "Git fetch downloads remote updates without merging them.",
+    example: "Run git fetch before checking the remote branch.",
+    zh: "拉取远程更新，但不合并",
+    emoji: "⬇️",
+  },
+  {
+    word: "git pull",
+    ipa: "/ɡɪt pʊl/",
+    pos: "cmd.",
+    meaning: "Git pull downloads remote updates and merges them automatically.",
+    example: "Run git pull to update your local branch.",
+    zh: "拉取 + 自动合并",
+    emoji: "🔀",
+  },
+  {
+    word: "The following is the breakdown of devices across different dimensions.",
+    ipa: "/ðə ˈfɑːloʊɪŋ ɪz ðə ˈbreɪkdaʊn əv dɪˈvaɪsɪz əˈkrɔːs ˈdɪfrənt daɪˈmenʃənz/",
+    pos: "sent.",
+    meaning:
+      "This sentence introduces a detailed breakdown of devices by different dimensions.",
+    example: "The following is the breakdown of devices across different dimensions.",
+    zh: "以下是不同维度下设备情况的明细拆解。",
+    emoji: "📊",
+  },
+  {
+    word: "device",
+    ipa: "/dɪˈvaɪs/",
+    pos: "n.",
+    meaning: "A device is a piece of equipment or technology.",
+    example: "Please check the device status.",
+    zh: "设备",
+    emoji: "📱",
+  },
+  {
+    word: "batch",
+    ipa: "/bætʃ/",
+    pos: "n.",
+    meaning: "A batch is a group of items handled together.",
+    example: "We tested the first batch of devices.",
+    zh: "批量；批次",
+    emoji: "📦",
+  },
+  {
+    word: "integration",
+    ipa: "/ˌɪntɪˈɡreɪʃən/",
+    pos: "n.",
+    meaning: "Integration is the process of combining parts so they work together.",
+    example: "This issue appeared during integration testing.",
+    zh: "集成；联调；整合",
+    emoji: "🧩",
+  },
+  {
+    word: "auxiliary",
+    ipa: "/ɔːɡˈzɪliəri/",
+    pos: "adj.",
+    meaning: "Auxiliary means helping or supporting the main thing.",
+    example: "This is an auxiliary tool for log analysis.",
+    zh: "辅助；辅助的",
+    emoji: "🛠️",
+  },
+  {
+    word: "extension",
+    ipa: "/ɪkˈstɛnʃən/",
+    pos: "n.",
+    meaning: "An extension is an added length, expansion, or extra time.",
+    example: "We requested an extension for the deadline.",
+    zh: "延长；扩展；延期",
+    emoji: "➕",
+  },
+  {
+    word: "an unacceptable extension of the construction period",
+    ipa: "",
+    pos: "phr.",
+    meaning:
+      "This phrase describes a delay in the construction period that cannot be accepted.",
+    example: "This caused an unacceptable extension of the construction period.",
+    zh: "一个不可接受的工期延长",
+    emoji: "🚧",
+  },
+  {
+    word: "carry out",
+    ipa: "/ˈkæri aʊt/",
+    pos: "phr.",
+    meaning: "To carry out something is to perform, conduct, or implement it.",
+    example: "We need to carry out the test plan tomorrow.",
+    zh: "执行；开展；实施",
+    emoji: "🚀",
+  },
+];
+
 const vocabularyByCategory = {
   shopping: shoppingWords,
   food: foodWords,
+  workplace: workplaceWords,
 };
 
 const emptyWords = [];
@@ -348,6 +573,8 @@ export default function App() {
     return categoryWords.filter((item) => {
       return (
         item.word.toLowerCase().includes(q) ||
+        item.ipa.toLowerCase().includes(q) ||
+        item.pos.toLowerCase().includes(q) ||
         item.example.toLowerCase().includes(q) ||
         item.meaning.toLowerCase().includes(q) ||
         item.zh.includes(q)
