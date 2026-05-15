@@ -1,7 +1,12 @@
 import { useMemo, useState } from "react";
 import { Volume2, Square, Search, RotateCcw } from "lucide-react";
 
-const words = [
+const categories = [
+  { id: "shopping", label: "Shopping", unit: "UNIT 11", title: "SHOPPING" },
+  { id: "food", label: "Food", unit: "UNIT 09", title: "FOOD" },
+];
+
+const shoppingWords = [
   {
     word: "afford",
     ipa: "/əˈfɔːrd/",
@@ -11,6 +16,7 @@ const words = [
       "To afford something is to be able to buy or do something because you have enough money or time.",
     example: "She can’t afford to shop anymore.",
     zh: "买得起；负担得起",
+    emoji: "💰",
   },
   {
     word: "around",
@@ -20,6 +26,7 @@ const words = [
       "To go around an area is to move to many places or parts of it.",
     example: "They’re walking around the mall.",
     zh: "到处；围绕；在周围",
+    emoji: "🚶‍♀️",
   },
   {
     word: "bookstore",
@@ -28,6 +35,7 @@ const words = [
     meaning: "A bookstore is a store that sells books.",
     example: "She’s shopping at a bookstore.",
     zh: "书店",
+    emoji: "📚",
   },
   {
     word: "card",
@@ -37,6 +45,7 @@ const words = [
       "A card is a small piece of plastic from a bank that you use to pay for things or get money.",
     example: "He’s paying with a card.",
     zh: "银行卡；卡片",
+    emoji: "💳",
   },
   {
     word: "chain",
@@ -46,6 +55,7 @@ const words = [
       "A chain is a number of stores or hotels owned by the same company or person.",
     example: "Most fast-food restaurants are chains.",
     zh: "连锁店；连锁企业",
+    emoji: "🏬",
   },
   {
     word: "choose",
@@ -56,6 +66,7 @@ const words = [
     example: "He’s trying to choose a shirt.",
     zh: "选择",
     note: "SYN. pick",
+    emoji: "✅",
   },
   {
     word: "closed",
@@ -66,6 +77,7 @@ const words = [
     example: "The café is closed today.",
     zh: "关门的；关闭的",
     note: "ANT. open",
+    emoji: "🔒",
   },
   {
     word: "discount",
@@ -74,6 +86,7 @@ const words = [
     meaning: "A discount is a special lower price for something.",
     example: "This store is offering big discounts.",
     zh: "折扣",
+    emoji: "🏷️",
   },
   {
     word: "dress",
@@ -83,6 +96,7 @@ const words = [
       "A dress is a piece of clothing usually for women or girls that covers the top of the body and hangs down over the legs.",
     example: "She’s wearing a new pink dress.",
     zh: "连衣裙；裙子",
+    emoji: "👗",
   },
   {
     word: "fashionable",
@@ -92,6 +106,7 @@ const words = [
       "If something is fashionable, it is popular at a certain time.",
     example: "You can see fashionable clothes at a fashion show.",
     zh: "流行的；时髦的",
+    emoji: "👠",
   },
   {
     word: "neat",
@@ -100,6 +115,7 @@ const words = [
     meaning: "If something is neat, it is tidy and clean.",
     example: "The store's shelves are very neat.",
     zh: "整洁的；干净的",
+    emoji: "🧼",
   },
   {
     word: "parking lot",
@@ -108,6 +124,7 @@ const words = [
     meaning: "A parking lot is an open area for cars to park in.",
     example: "There are a lot of cars in the parking lot.",
     zh: "停车场",
+    emoji: "🅿️",
   },
   {
     word: "pick",
@@ -117,6 +134,7 @@ const words = [
     example: "He picks a gray T-shirt.",
     zh: "挑选；选择",
     note: "SYN. choose",
+    emoji: "👆",
   },
   {
     word: "price",
@@ -125,6 +143,7 @@ const words = [
     meaning: "The price of something is how much you have to pay for it.",
     example: "She's checking the price.",
     zh: "价格；价钱",
+    emoji: "💲",
   },
   {
     word: "sell",
@@ -134,6 +153,7 @@ const words = [
     meaning: "To sell something is to offer it for people to buy.",
     example: "She sells makeup.",
     zh: "卖；出售",
+    emoji: "🛍️",
   },
   {
     word: "shop",
@@ -142,6 +162,7 @@ const words = [
     meaning: "A shop is a place where you can buy goods or services.",
     example: "He works at a bike shop.",
     zh: "商店；店铺",
+    emoji: "🏪",
   },
   {
     word: "shopper",
@@ -150,6 +171,7 @@ const words = [
     meaning: "A shopper is someone who buys things in stores.",
     example: "The store is filled with shoppers.",
     zh: "购物者；顾客",
+    emoji: "🛒",
   },
   {
     word: "supermarket",
@@ -159,6 +181,7 @@ const words = [
       "A supermarket is a large store that sells food, drinks, and other things people need in their homes.",
     example: "This supermarket is huge.",
     zh: "超市",
+    emoji: "🛒",
   },
   {
     word: "try",
@@ -168,6 +191,7 @@ const words = [
     meaning: "To try is to attempt to do something.",
     example: "She is trying to decide what to buy.",
     zh: "尝试；试图",
+    emoji: "🤔",
   },
   {
     word: "wonderful",
@@ -176,8 +200,123 @@ const words = [
     meaning: "If something is wonderful, it is very good.",
     example: "He thinks this store is wonderful.",
     zh: "极好的；精彩的",
+    emoji: "🌟",
   },
 ];
+
+const foodWords = [
+  {
+    word: "lemon",
+    ipa: "/ˈlemən/",
+    pos: "n.",
+    meaning:
+      "A lemon is a fruit with a hard, yellow skin and sour juice.",
+    example: "We have fresh lemon juice.",
+    zh: "柠檬",
+    emoji: "🍋",
+  },
+  {
+    word: "melon",
+    ipa: "/ˈmelən/",
+    pos: "n.",
+    meaning: "A melon is a large, round fruit with sweet, juicy flesh.",
+    example: "I'd like a slice of melon, please.",
+    zh: "瓜；甜瓜",
+    emoji: "🍈",
+  },
+  {
+    word: "milkshake",
+    ipa: "/ˈmɪlkʃeɪk/",
+    pos: "n.",
+    meaning:
+      "A milkshake is a sweet drink made of milk and chocolate or fruit.",
+    example: "They're enjoying their milkshakes.",
+    zh: "奶昔",
+    emoji: "🥤",
+  },
+  {
+    word: "orange",
+    ipa: "/ˈɔːrɪndʒ/",
+    pos: "n.",
+    meaning:
+      "An orange is a round, sweet fruit with a thick skin and is divided into parts inside.",
+    example: "I cut an orange in half.",
+    zh: "橙子",
+    emoji: "🍊",
+  },
+  {
+    word: "pasta",
+    ipa: "/ˈpɑːstə/",
+    pos: "n.",
+    meaning:
+      "Pasta is an Italian food made from flour, eggs, and water, and cut into different shapes.",
+    example: "Today's lunch is pasta with tomato sauce.",
+    zh: "意大利面",
+    emoji: "🍝",
+  },
+  {
+    word: "salad",
+    ipa: "/ˈsæləd/",
+    pos: "n.",
+    meaning:
+      "Salad is a mix of raw vegetables, especially lettuce and tomato.",
+    example: "That salad looks delicious.",
+    zh: "沙拉",
+    emoji: "🥗",
+  },
+  {
+    word: "shrimp",
+    ipa: "/ʃrɪmp/",
+    pos: "n.",
+    meaning:
+      "A shrimp is a small sea animal with a shell and legs that you can eat.",
+    example: "You can cook shrimp in a pan.",
+    zh: "虾",
+    note: "SYN. prawn",
+    emoji: "🦐",
+  },
+  {
+    word: "snack",
+    ipa: "/snæk/",
+    pos: "n.",
+    meaning:
+      "A snack is a small amount of food that is eaten between main meals.",
+    example: "An apple is a healthy snack.",
+    zh: "点心；小吃",
+    emoji: "🍪",
+  },
+  {
+    word: "supper",
+    ipa: "/ˈsʌpər/",
+    pos: "n.",
+    meaning: "Supper is a meal that you eat in the evening.",
+    example: "The family is eating supper together.",
+    zh: "晚餐",
+    note: "SYN. dinner",
+    emoji: "🍽️",
+  },
+  {
+    word: "thirsty",
+    ipa: "/ˈθɜːrsti/",
+    pos: "adj.",
+    meaning: "If someone is thirsty, they want or need a drink.",
+    example: "Hot weather makes people thirsty.",
+    zh: "口渴的",
+    emoji: "💧",
+  },
+];
+
+const vocabularyByCategory = {
+  shopping: shoppingWords,
+  food: foodWords,
+};
+
+const emptyWords = [];
+
+function getWordImagePath(categoryId, word) {
+  const imageName = word.toLowerCase().replace(/\s+/g, "-");
+  return `/images/${categoryId}/${imageName}.jpg`;
+}
 
 function getEnglishVoice() {
   const voices = window.speechSynthesis?.getVoices?.() || [];
@@ -190,16 +329,23 @@ function getEnglishVoice() {
 }
 
 export default function App() {
+  const [activeCategory, setActiveCategory] = useState("shopping");
   const [query, setQuery] = useState("");
   const [playing, setPlaying] = useState(null);
   const [rate, setRate] = useState(0.82);
+  const [visibleZh, setVisibleZh] = useState({});
+
+  const activeCategoryInfo =
+    categories.find((category) => category.id === activeCategory) ||
+    categories[0];
+  const categoryWords = vocabularyByCategory[activeCategory] || emptyWords;
 
   const filteredWords = useMemo(() => {
     const q = query.trim().toLowerCase();
 
-    if (!q) return words;
+    if (!q) return categoryWords;
 
-    return words.filter((item) => {
+    return categoryWords.filter((item) => {
       return (
         item.word.toLowerCase().includes(q) ||
         item.example.toLowerCase().includes(q) ||
@@ -207,7 +353,7 @@ export default function App() {
         item.zh.includes(q)
       );
     });
-  }, [query]);
+  }, [categoryWords, query]);
 
   const speak = (text, key) => {
     if (!window.speechSynthesis) {
@@ -250,6 +396,15 @@ export default function App() {
     speak(`${item.word}. ${item.example}`, `${item.word}-example`);
   };
 
+  const toggleChinese = (item) => {
+    const key = `${activeCategory}-${item.word}`;
+
+    setVisibleZh((current) => ({
+      ...current,
+      [key]: !current[key],
+    }));
+  };
+
   return (
     <div style={styles.page}>
       <style>
@@ -276,9 +431,9 @@ export default function App() {
 
       <div style={styles.container}>
         <header style={styles.header}>
-          <div>
-            <div style={styles.unit}>UNIT 11</div>
-            <h1 style={styles.title}>SHOPPING</h1>
+          <div style={styles.headerContent}>
+            <div style={styles.unit}>{activeCategoryInfo.unit}</div>
+            <h1 style={styles.title}>{activeCategoryInfo.title}</h1>
             <p style={styles.subtitle}>
               点击单词、释义、例句按钮，即可播放美式英语读音。
             </p>
@@ -294,6 +449,7 @@ export default function App() {
               onClick={() => {
                 setQuery("");
                 setRate(0.82);
+                setVisibleZh({});
                 stop();
               }}
               style={styles.headerButton}
@@ -303,6 +459,30 @@ export default function App() {
             </button>
           </div>
         </header>
+
+        <nav style={styles.categoryTabs} aria-label="Vocabulary categories">
+          {categories.map((category) => {
+            const isActive = activeCategory === category.id;
+
+            return (
+              <button
+                key={category.id}
+                onClick={() => {
+                  setActiveCategory(category.id);
+                  setQuery("");
+                  setVisibleZh({});
+                  stop();
+                }}
+                style={{
+                  ...styles.categoryTab,
+                  ...(isActive ? styles.activeCategoryTab : {}),
+                }}
+              >
+                {category.label}
+              </button>
+            );
+          })}
+        </nav>
 
         <section style={styles.toolbar}>
           <div style={styles.searchBox}>
@@ -334,7 +514,26 @@ export default function App() {
 
         <main style={styles.cardList}>
           {filteredWords.map((item) => (
-            <article key={item.word} style={styles.wordCard}>
+            <article key={`${activeCategory}-${item.word}`} style={styles.wordCard}>
+              <div style={styles.wordImageFrame}>
+                <div style={styles.wordImageFallback}>
+                  <span style={item.emoji ? styles.wordEmoji : styles.wordInitial}>
+                    {item.emoji || item.word.slice(0, 1).toUpperCase()}
+                  </span>
+                  <span style={styles.wordImageMeta}>
+                    {activeCategoryInfo.label} · {item.pos}
+                  </span>
+                </div>
+                <img
+                  src={getWordImagePath(activeCategory, item.word)}
+                  alt={item.word}
+                  style={styles.wordImage}
+                  onError={(event) => {
+                    event.currentTarget.style.display = "none";
+                  }}
+                />
+              </div>
+
               <div style={styles.wordContent}>
                 <div style={styles.wordTop}>
                   <h2 style={styles.word}>{item.word}</h2>
@@ -346,7 +545,19 @@ export default function App() {
 
                 <p style={styles.meaning}>{item.meaning}</p>
                 <p style={styles.example}>{item.example}</p>
-                <p style={styles.zh}>中文：{item.zh}</p>
+                <button
+                  onClick={() => toggleChinese(item)}
+                  style={{
+                    ...styles.zhToggle,
+                    ...(visibleZh[`${activeCategory}-${item.word}`]
+                      ? styles.zhVisible
+                      : {}),
+                  }}
+                >
+                  {visibleZh[`${activeCategory}-${item.word}`]
+                    ? `中文：${item.zh}`
+                    : "显示中文"}
+                </button>
               </div>
 
               <div style={styles.audioButtons}>
@@ -416,46 +627,78 @@ const styles = {
   header: {
     background: "linear-gradient(135deg, #0369a1, #0891b2)",
     color: "white",
-    borderRadius: "28px",
-    padding: "28px",
+    borderRadius: "20px",
+    padding: "18px 22px",
     display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
     justifyContent: "space-between",
-    gap: "20px",
-    flexWrap: "wrap",
+    gap: "18px",
+    textAlign: "left",
     boxShadow: "0 16px 40px rgba(2, 132, 199, 0.25)",
+    flexWrap: "wrap",
+  },
+  headerContent: {
+    flex: "1 1 520px",
   },
   unit: {
     color: "#fde047",
     fontWeight: 900,
     letterSpacing: "2px",
-    fontSize: "14px",
+    fontSize: "13px",
+    lineHeight: 1,
   },
   title: {
-    fontSize: "52px",
-    margin: "4px 0",
+    fontSize: "34px",
+    lineHeight: 1,
+    margin: "5px 0 6px",
     fontWeight: 900,
-    letterSpacing: "-1px",
+    letterSpacing: "0",
   },
   subtitle: {
     margin: 0,
     color: "#e0f2fe",
-    fontSize: "17px",
+    fontSize: "15px",
+    lineHeight: 1.45,
   },
   headerButtons: {
     display: "flex",
     gap: "10px",
-    alignItems: "flex-end",
+    alignItems: "center",
+    justifyContent: "flex-end",
+    flexWrap: "wrap",
   },
   headerButton: {
     border: "none",
-    borderRadius: "16px",
-    padding: "12px 16px",
+    borderRadius: "12px",
+    padding: "10px 13px",
     color: "white",
     background: "rgba(255,255,255,0.18)",
     fontWeight: 700,
     display: "flex",
     alignItems: "center",
     gap: "8px",
+  },
+  categoryTabs: {
+    display: "flex",
+    gap: "10px",
+    marginTop: "18px",
+    flexWrap: "wrap",
+  },
+  categoryTab: {
+    border: "2px solid transparent",
+    borderRadius: "16px",
+    padding: "12px 18px",
+    background: "white",
+    color: "#0369a1",
+    fontSize: "16px",
+    fontWeight: 900,
+    boxShadow: "0 8px 24px rgba(15, 23, 42, 0.06)",
+  },
+  activeCategoryTab: {
+    background: "#fde047",
+    borderColor: "#f59e0b",
+    color: "#111827",
   },
   toolbar: {
     display: "grid",
@@ -505,12 +748,56 @@ const styles = {
     padding: "18px",
     marginBottom: "14px",
     display: "flex",
+    alignItems: "center",
     justifyContent: "space-between",
     gap: "16px",
     flexWrap: "wrap",
   },
+  wordImageFrame: {
+    width: "150px",
+    height: "112px",
+    borderRadius: "16px",
+    background: "linear-gradient(135deg, #e0f2fe, #fef3c7)",
+    border: "1px solid #e2e8f0",
+    overflow: "hidden",
+    position: "relative",
+    display: "grid",
+    placeItems: "center",
+    flex: "0 0 auto",
+  },
+  wordImageFallback: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    gap: "7px",
+    color: "#0369a1",
+    padding: "12px",
+    textAlign: "center",
+  },
+  wordEmoji: {
+    fontSize: "42px",
+    lineHeight: 1,
+  },
+  wordInitial: {
+    fontSize: "42px",
+    fontWeight: 900,
+    lineHeight: 1,
+  },
+  wordImageMeta: {
+    color: "#475569",
+    fontSize: "12px",
+    fontWeight: 800,
+    lineHeight: 1.2,
+  },
+  wordImage: {
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
+    position: "absolute",
+    inset: 0,
+  },
   wordContent: {
-    flex: "1 1 560px",
+    flex: "1 1 420px",
   },
   wordTop: {
     display: "flex",
@@ -560,10 +847,21 @@ const styles = {
     fontWeight: 700,
     margin: "4px 0",
   },
-  zh: {
+  zhToggle: {
+    border: "1px solid #cbd5e1",
+    borderRadius: "999px",
+    background: "#f8fafc",
     color: "#64748b",
-    fontWeight: 700,
-    margin: "4px 0 0",
+    fontSize: "15px",
+    fontWeight: 800,
+    margin: "8px 0 0",
+    padding: "8px 14px",
+    minWidth: "96px",
+  },
+  zhVisible: {
+    background: "#fef3c7",
+    borderColor: "#f59e0b",
+    color: "#475569",
   },
   audioButtons: {
     display: "flex",
