@@ -4,7 +4,12 @@ import { Volume2, Square, Search, RotateCcw } from "lucide-react";
 const categories = [
   { id: "shopping", label: "Shopping", unit: "UNIT 11", title: "SHOPPING" },
   { id: "food", label: "Food", unit: "UNIT 09", title: "FOOD" },
-  { id: "workplace", label: "Workplace", unit: "WORK", title: "WORKPLACE" },
+  {
+    id: "workplace",
+    label: "workplace-May 12th(twelfth)",
+    unit: "WORK",
+    title: "workplace-May 12th(twelfth)",
+  },
 ];
 
 const shoppingWords = [
@@ -527,6 +532,60 @@ const workplaceWords = [
     example: "We need to carry out the test plan tomorrow.",
     zh: "执行；开展；实施",
     emoji: "🚀",
+  },
+  {
+    word: "top page",
+    ipa: "",
+    pos: "phr.",
+    meaning: "Top page means the first page or the page at the very top.",
+    example: "Click top page to go back to the first page.",
+    zh: "最上面一页；首页",
+    emoji: "⏫",
+  },
+  {
+    word: "previous",
+    ipa: "/ˈpriːviəs/",
+    pos: "adj.",
+    meaning: "Previous means the one before the current one.",
+    example: "Click previous to go back to the last page.",
+    zh: "上一页；以前的",
+    emoji: "⬅️",
+  },
+  {
+    word: "next",
+    ipa: "/nekst/",
+    pos: "adj.",
+    meaning: "Next means the one after the current one.",
+    example: "Click next to open the following page.",
+    zh: "下一页；下一个",
+    emoji: "➡️",
+  },
+  {
+    word: "last",
+    ipa: "/læst/",
+    pos: "adj.",
+    meaning: "Last means the final one in a list or sequence.",
+    example: "Click last to jump to the final page.",
+    zh: "最后一页；最后的",
+    emoji: "⏭️",
+  },
+  {
+    word: "pre-",
+    ipa: "/priː/",
+    pos: "prefix",
+    meaning: "Pre- is a prefix that means before.",
+    example: "Preview means to view something before it is final.",
+    zh: "前缀：在……之前；预先",
+    emoji: "🔤",
+  },
+  {
+    word: "per-",
+    ipa: "/pɜːr/",
+    pos: "prefix",
+    meaning: "Per- can mean through, throughout, or by each unit.",
+    example: "Per sprint means for each sprint.",
+    zh: "前缀：每；通过；贯穿",
+    emoji: "🔡",
   },
 ];
 
